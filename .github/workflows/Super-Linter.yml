@@ -1,17 +1,20 @@
-name : Super-Linter
+name: Super-Linter
 
-on : push
+on:
+  push:
+    branches:
+      - main # or your default branch
 
 jobs:
   super-lint:
     name: Lint code base
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3 # Use v3 or later for better performance and security
 
       - name: Run Super-Linter
-        uses: github/super-linter@v3
+        uses: github/super-linter@v4 # Use the latest version of Super-Linter
         env:
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: $(( secret.GITHUB_TOKEN )) 
+          DEFAULT_BRANCH: main # or your default branch
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Correct syntax for accessing secrets
